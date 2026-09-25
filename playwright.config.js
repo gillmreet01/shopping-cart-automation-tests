@@ -1,5 +1,5 @@
 // @ts-check
-const { defineConfig } = require('@playwright/test');
+const { defineConfig, devices } = require('@playwright/test');
 
 module.exports = defineConfig({
   testDir: './tests',
@@ -12,4 +12,10 @@ module.exports = defineConfig({
     screenshot: 'only-on-failure',
     trace: 'on-first-retry', // records a step-by-step trace for failed tests
   },
+  // Cross-browser: every test runs once per project below
+  projects: [
+    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+  ],
 });

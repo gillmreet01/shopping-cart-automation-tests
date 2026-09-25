@@ -5,16 +5,20 @@ Playwright + JavaScript end-to-end tests for the SauceDemo shopping cart (https:
 ## Setup
 ```
 npm install
-npx playwright install chromium
+npx playwright install
 ```
 
 ## Run
 ```
-npm test              # headless, all tests
+npm test              # headless, all tests on Chromium, Firefox and WebKit
 npm run test:headed   # watch the browser
 npm run report        # open the HTML report
+npx playwright test --project=chromium   # one browser
 npx playwright test tests/cart.spec.js   # one file
 ```
+
+Every test runs once per browser (17 tests x 3 browsers = 51 runs). The same suite runs
+automatically on GitHub Actions (`.github/workflows/playwright.yml`) on every push.
 
 ## Structure
 ```
@@ -22,7 +26,8 @@ data/testData.js      users, products, checkout details (single source of test d
 pages/                Page Objects: LoginPage, InventoryPage, CartPage, CheckoutPage
 fixtures/index.js     custom fixtures that hand page objects to tests
 tests/                login.spec.js, cart.spec.js, checkout.spec.js
-playwright.config.js  base URL, timeout, retries, reporter, screenshots/traces
+playwright.config.js  base URL, timeout, retries, reporter, screenshots/traces, browsers
+.github/workflows/    CI: runs the suite on push
 ```
 
 ## What is tested (17 tests)

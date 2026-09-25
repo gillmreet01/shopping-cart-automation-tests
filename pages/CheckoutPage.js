@@ -31,6 +31,8 @@ class CheckoutPage {
 
   // Sum of the individual item prices shown on the overview screen
   async getSumOfItemPrices() {
+    // allTextContents() does not auto-wait, so wait for the overview items to render first
+    await this.itemPrices.first().waitFor();
     const texts = await this.itemPrices.allTextContents(); // e.g. ['$29.99', '$9.99']
     return texts.reduce((sum, text) => sum + parseFloat(text.replace('$', '')), 0);
   }
