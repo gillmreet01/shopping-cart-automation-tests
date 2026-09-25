@@ -14,6 +14,7 @@ npm test              # headless, all tests on Chromium, Firefox and WebKit
 npm run test:headed   # watch the browser
 npm run report        # open the HTML report
 npx playwright test --project=chromium   # one browser
+$env:SLOWMO=700; npx playwright test --project=chrome --headed --workers=1   # watch slowly in installed Chrome (PowerShell)
 npx playwright test tests/cart.spec.js   # one file
 ```
 
